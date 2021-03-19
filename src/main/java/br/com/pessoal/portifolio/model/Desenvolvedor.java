@@ -30,6 +30,14 @@ public class Desenvolvedor {
         return nome;
     }
 
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }

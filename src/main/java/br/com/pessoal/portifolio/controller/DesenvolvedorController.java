@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+
 @RestController
 @RequestMapping("/desenvolvedores")
 public class DesenvolvedorController {
@@ -31,9 +33,12 @@ public class DesenvolvedorController {
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<DesenvolvedorDto> cadastrarDesenvolvedor(@RequestBody DesenvolvedorForm form, UriComponentsBuilder uri){
+    public ResponseEntity<DesenvolvedorDto> cadastrarDesenvolvedor(@RequestBody DesenvolvedorForm form, UriComponentsBuilder uriBuilder){
         Desenvolvedor dev = form.converter(usuarioRepository);
+        desenvolvedorRepository.save(dev);
 
+        URI uri = uriBuilder.path("/desenvolvedores/{id}").buildAndExpand(dev.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DesenvolvedorDto(dev));
     }
 
 }
