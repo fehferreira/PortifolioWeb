@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/desenvolvedores")
@@ -44,8 +45,8 @@ public class DesenvolvedorController {
 
     @PutMapping
     @ResponseBody
-    public ResponseEntity<DesenvolvedorDto> atualizarDesenvolvedor(@RequestParam DesenvolvedorAtualizadoForm UpdateForm){
-
+    public ResponseEntity<DesenvolvedorDto> atualizarDesenvolvedor(@RequestParam DesenvolvedorAtualizadoForm updateForm){
+        Optional<Desenvolvedor> desevolvedor = desenvolvedorRepository.findById(updateForm.getId());
     }
 
 }
