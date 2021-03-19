@@ -1,15 +1,18 @@
 package br.com.pessoal.portifolio.controller;
 
 import br.com.pessoal.portifolio.controller.dto.DesenvolvedorDto;
+import br.com.pessoal.portifolio.controller.form.DesenvolvedorForm;
+import br.com.pessoal.portifolio.model.Desenvolvedor;
 import br.com.pessoal.portifolio.repository.DesenvolvedorRepository;
+import br.com.pessoal.portifolio.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/desenvolvedores")
@@ -18,9 +21,19 @@ public class DesenvolvedorController {
     @Autowired
     private DesenvolvedorRepository desenvolvedorRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @GetMapping
     public Page<DesenvolvedorDto> listarDesenvolvedores(@PageableDefault(sort="id", direction = Sort.Direction.ASC)Pageable pageable){
         return DesenvolvedorDto.converter(desenvolvedorRepository.findAll(pageable));
+    }
+
+    @PostMapping
+    @ResponseBody
+    public ResponseEntity<DesenvolvedorDto> cadastrarDesenvolvedor(@RequestBody DesenvolvedorForm form, UriComponentsBuilder uri){
+        Desenvolvedor dev = form.converter(usuarioRepository);
+
     }
 
 }

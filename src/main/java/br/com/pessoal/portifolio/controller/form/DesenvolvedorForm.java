@@ -1,30 +1,20 @@
-package br.com.pessoal.portifolio.model;
+package br.com.pessoal.portifolio.controller.form;
 
-import javax.persistence.*;
 
-@Entity
-public class Desenvolvedor {
+import br.com.pessoal.portifolio.model.Desenvolvedor;
+import br.com.pessoal.portifolio.model.Usuario;
+import br.com.pessoal.portifolio.repository.DesenvolvedorRepository;
+import br.com.pessoal.portifolio.repository.UsuarioRepository;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+public class DesenvolvedorForm {
+
     private String nome;
     private String sobreNome;
     private String cpf;
     private String endereco;
     private String cargo;
 
-    @OneToOne
     private Usuario seuUsuario;
-
-    public Desenvolvedor(String nome, String sobreNome, String cpf, String endereco, String cargo, Usuario byUsername) {
-        this.nome = nome;
-        this.sobreNome = sobreNome;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.cargo = cargo;
-        this.seuUsuario = byUsername;
-    }
 
     public String getNome() {
         return nome;
@@ -65,4 +55,10 @@ public class Desenvolvedor {
     public void setCargo(String cargo) {
         this.cargo = cargo;
     }
+
+    public Desenvolvedor converter(UsuarioRepository usuarioRepository) {
+        return new Desenvolvedor(this.nome, this.sobreNome, this.cpf, this.endereco, this.cargo, usuarioRepository.findByUsername(this.seuUsuario.getUsername()));
+    }
+
+
 }
