@@ -1,4 +1,4 @@
-package br.com.pessoal.portifolio;
+package br.com.pessoal.portifolio.model;
 
 import javax.persistence.*;
 
