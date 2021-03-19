@@ -1,6 +1,7 @@
 package br.com.pessoal.portifolio.controller;
 
 import br.com.pessoal.portifolio.controller.dto.DesenvolvedorDto;
+import br.com.pessoal.portifolio.controller.form.DesenvolvedorAtualizadoForm;
 import br.com.pessoal.portifolio.controller.form.DesenvolvedorForm;
 import br.com.pessoal.portifolio.model.Desenvolvedor;
 import br.com.pessoal.portifolio.repository.DesenvolvedorRepository;
@@ -39,6 +40,12 @@ public class DesenvolvedorController {
 
         URI uri = uriBuilder.path("/desenvolvedores/{id}").buildAndExpand(dev.getId()).toUri();
         return ResponseEntity.created(uri).body(new DesenvolvedorDto(dev));
+    }
+
+    @PutMapping
+    @ResponseBody
+    public ResponseEntity<DesenvolvedorDto> atualizarDesenvolvedor(@RequestParam DesenvolvedorAtualizadoForm UpdateForm){
+
     }
 
 }

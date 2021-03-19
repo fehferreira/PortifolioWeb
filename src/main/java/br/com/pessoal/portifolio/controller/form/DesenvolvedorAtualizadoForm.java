@@ -1,12 +1,10 @@
 package br.com.pessoal.portifolio.controller.form;
 
-
-import br.com.pessoal.portifolio.model.Desenvolvedor;
 import br.com.pessoal.portifolio.model.Usuario;
-import br.com.pessoal.portifolio.repository.UsuarioRepository;
 
-public class DesenvolvedorForm {
+public class DesenvolvedorAtualizadoForm {
 
+    private Long id;
     private String nome;
     private String sobreNome;
     private String cpf;
@@ -14,6 +12,15 @@ public class DesenvolvedorForm {
     private String cargo;
 
     private Usuario seuUsuario;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -55,9 +62,11 @@ public class DesenvolvedorForm {
         this.cargo = cargo;
     }
 
-    public Desenvolvedor converter(UsuarioRepository usuarioRepository) {
-        return new Desenvolvedor(this.nome, this.sobreNome, this.cpf, this.endereco, this.cargo, usuarioRepository.findByUsername(this.seuUsuario.getUsername()));
+    public Usuario getSeuUsuario() {
+        return seuUsuario;
     }
 
-
+    public void setSeuUsuario(Usuario seuUsuario) {
+        this.seuUsuario = seuUsuario;
+    }
 }
