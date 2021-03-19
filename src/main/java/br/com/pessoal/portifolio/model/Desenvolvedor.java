@@ -12,6 +12,7 @@ public class Desenvolvedor {
     private String sobreNome;
     private String cpf;
     private String endereco;
+    private String cargo;
 
     @OneToOne
     private Usuario seuUsuario;
@@ -46,5 +47,13 @@ public class Desenvolvedor {
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 }
