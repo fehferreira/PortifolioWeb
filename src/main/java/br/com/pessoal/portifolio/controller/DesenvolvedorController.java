@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -51,6 +52,16 @@ public class DesenvolvedorController {
             desenvolvedorRepository.save(desenvolvedor.get());
             return ResponseEntity.ok(DesenvolvedorDto.converter(desenvolvedor.get()));
         }else{
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deletarDesenvolvedor(@RequestParam Long idDesenvolvedor){
+        try{
+            desenvolvedorRepository.deleteById(idDesenvolvedor);
+            return ResponseEntity.ok().build();
+        }catch (Exception e){
             return ResponseEntity.notFound().build();
         }
     }
