@@ -46,7 +46,13 @@ public class DesenvolvedorController {
     @PutMapping
     @ResponseBody
     public ResponseEntity<DesenvolvedorDto> atualizarDesenvolvedor(@RequestParam DesenvolvedorAtualizadoForm updateForm){
-        Optional<Desenvolvedor> desevolvedor = desenvolvedorRepository.findById(updateForm.getId());
+        Optional<Desenvolvedor> desenvolvedor = desenvolvedorRepository.findById(updateForm.getId());
+        if(desenvolvedor.isPresent()){
+            desenvolvedorRepository.save(desenvolvedor.get());
+            return ResponseEntity.ok(DesenvolvedorDto.converter(desenvolvedor.get()));
+        }else{
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }
