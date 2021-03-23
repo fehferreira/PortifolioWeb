@@ -8,10 +8,14 @@ public class DesenvolvedorDto {
     private String nome;
     private String cargo;
 
-public DesenvolvedorDto(Desenvolvedor desenvolvedor){
-    this.nome = desenvolvedor.getNome();
-    this.cargo = desenvolvedor.getCargo();
-}
+    public DesenvolvedorDto(Desenvolvedor desenvolvedor){
+        this.nome = desenvolvedor.getNome();
+        this.cargo = desenvolvedor.getCargo();
+    }
+
+    public static DesenvolvedorDto converter(Desenvolvedor desenvolvedor) {
+        return new DesenvolvedorDto(desenvolvedor);
+    }
 
     public String getNome() {
         return nome;
