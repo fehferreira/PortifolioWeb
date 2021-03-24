@@ -1,19 +1,26 @@
 package br.com.pessoal.portifolio.controller.form;
 
 
+import br.com.pessoal.portifolio.model.AreaAtuacao;
 import br.com.pessoal.portifolio.model.Desenvolvedor;
+import br.com.pessoal.portifolio.model.Senioridade;
 import br.com.pessoal.portifolio.model.Usuario;
 import br.com.pessoal.portifolio.repository.UsuarioRepository;
+
+import java.util.HashSet;
 
 public class DesenvolvedorForm {
 
     private String nome;
-    private String sobreNome;
-    private String cpf;
-    private String endereco;
-    private String cargo;
-
     private Usuario seuUsuario;
+    private String telefone;
+    private AreaAtuacao suaArea;
+    private Senioridade suaSenioridade;
+
+    public Desenvolvedor converter(UsuarioRepository usuarioRepository) {
+        return new Desenvolvedor(this.nome,null,usuarioRepository.findByUsername(this.seuUsuario.getUsername()),
+                this.telefone,this.suaArea,this.suaSenioridade,null);
+    }
 
     public String getNome() {
         return nome;
@@ -23,41 +30,35 @@ public class DesenvolvedorForm {
         this.nome = nome;
     }
 
-    public String getSobreNome() {
-        return sobreNome;
+    public Usuario getSeuUsuario() {
+        return seuUsuario;
     }
 
-    public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
+    public void setSeuUsuario(Usuario seuUsuario) {
+        this.seuUsuario = seuUsuario;
     }
 
-    public String getCpf() {
-        return cpf;
+    public String getTelefone() {
+        return telefone;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public AreaAtuacao getSuaArea() {
+        return suaArea;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setSuaArea(AreaAtuacao suaArea) {
+        this.suaArea = suaArea;
     }
 
-    public String getCargo() {
-        return cargo;
+    public Senioridade getSuaSenioridade() {
+        return suaSenioridade;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setSuaSenioridade(Senioridade suaSenioridade) {
+        this.suaSenioridade = suaSenioridade;
     }
-
-    public Desenvolvedor converter(UsuarioRepository usuarioRepository) {
-        return new Desenvolvedor(this.nome, this.sobreNome, this.cpf, this.endereco, this.cargo, usuarioRepository.findByUsername(this.seuUsuario.getUsername()));
-    }
-
-
 }

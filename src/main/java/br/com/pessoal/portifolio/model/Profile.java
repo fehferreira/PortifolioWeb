@@ -19,6 +19,11 @@ public class Profile implements GrantedAuthority{
         this.type = type;
     }
 
+    @Deprecated
+    public Profile() {
+
+    }
+
     public String getType() {
         return type;
     }

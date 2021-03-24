@@ -1,6 +1,7 @@
 package br.com.pessoal.portifolio.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Desenvolvedor {
@@ -9,25 +10,34 @@ public class Desenvolvedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
     private String nome;
-    private String sobreNome;
-    private String cpf;
-    private String endereco;
-    private String cargo;
+    private String experiencias;
 
     @OneToOne
     private Usuario seuUsuario;
 
-    public Desenvolvedor(String nome, String sobreNome, String cpf, String endereco, String cargo, Usuario byUsername) {
+    private String numeroTelefone;
+
+    @Enumerated(EnumType.ORDINAL)
+    private AreaAtuacao areaAtuacao;
+
+    @Enumerated(EnumType.STRING)
+    private Senioridade devSenioridade;
+
+    @Enumerated(EnumType.ORDINAL)
+    private Set<Tecnologias> suaTecnologia;
+
+    public Desenvolvedor(String nome, String experiencias, Usuario seuUsuario, String numeroTelefone, AreaAtuacao areaAtuacao, Senioridade devSenioridade, Set<Tecnologias> suaTecnologia) {
         this.nome = nome;
-        this.sobreNome = sobreNome;
-        this.cpf = cpf;
-        this.endereco = endereco;
-        this.cargo = cargo;
-        this.seuUsuario = byUsername;
+        this.experiencias = experiencias;
+        this.seuUsuario = seuUsuario;
+        this.numeroTelefone = numeroTelefone;
+        this.areaAtuacao = areaAtuacao;
+        this.devSenioridade = devSenioridade;
+        this.suaTecnologia = suaTecnologia;
     }
 
-    public String getNome() {
-        return nome;
+    @Deprecated
+    public Desenvolvedor() {
     }
 
     public Long getId() {
@@ -38,39 +48,59 @@ public class Desenvolvedor {
         Id = id;
     }
 
+    public String getNome() {
+        return nome;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public String getSobreNome() {
-        return sobreNome;
+    public String getExperiencias() {
+        return experiencias;
     }
 
-    public void setSobreNome(String sobreNome) {
-        this.sobreNome = sobreNome;
+    public void setExperiencias(String experiencias) {
+        this.experiencias = experiencias;
     }
 
-    public String getCpf() {
-        return cpf;
+    public Usuario getSeuUsuario() {
+        return seuUsuario;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setSeuUsuario(Usuario seuUsuario) {
+        this.seuUsuario = seuUsuario;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getNumeroTelefone() {
+        return numeroTelefone;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setNumeroTelefone(String numeroTelefone) {
+        this.numeroTelefone = numeroTelefone;
     }
 
-    public String getCargo() {
-        return cargo;
+    public AreaAtuacao getAreaAtuacao() {
+        return areaAtuacao;
     }
 
-    public void setCargo(String cargo) {
-        this.cargo = cargo;
+    public void setAreaAtuacao(AreaAtuacao areaAtuacao) {
+        this.areaAtuacao = areaAtuacao;
+    }
+
+    public Senioridade getDevSenioridade() {
+        return devSenioridade;
+    }
+
+    public void setDevSenioridade(Senioridade devSenioridade) {
+        this.devSenioridade = devSenioridade;
+    }
+
+    public Set<Tecnologias> getSuaTecnologia() {
+        return suaTecnologia;
+    }
+
+    public void setSuaTecnologia(Set<Tecnologias> suaTecnologia) {
+        this.suaTecnologia = suaTecnologia;
     }
 }
