@@ -25,6 +25,10 @@ public class Usuario implements UserDetails {
         this.profile = profile;
     }
 
+    @Deprecated
+    public Usuario() {
+    }
+
     public String getUsername() {
         return username;
     }
