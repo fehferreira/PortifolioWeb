@@ -23,7 +23,10 @@ public class Desenvolvedor {
     @Enumerated(EnumType.STRING)
     private Senioridade devSenioridade;
 
-    @Enumerated(EnumType.ORDINAL)
+    @ElementCollection(targetClass = Tecnologias.class, fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_tecnologias", joinColumns = @JoinColumn(name = "tecnologiasid"))
+    @Column(name = "tecnologias", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Set<Tecnologias> suaTecnologia;
 
     public Desenvolvedor(String nome, String experiencias, Usuario seuUsuario, String numeroTelefone, AreaAtuacao areaAtuacao, Senioridade devSenioridade, Set<Tecnologias> suaTecnologia) {

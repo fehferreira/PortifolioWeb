@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.List;
 
 @RestController
@@ -22,7 +21,7 @@ public class HomeController {
         return ResponseEntity.ok("BOAS VINDAS AO SITE DE PORTIFÓLIOS ONLINE");
     }
 
-    public void populateSpry(){
+    public void populateSpy(){
 
         List<Profile> profiles = new ArrayList<>();
         List<Usuario> usuarios = new ArrayList<>();
