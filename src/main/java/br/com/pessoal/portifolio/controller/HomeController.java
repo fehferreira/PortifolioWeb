@@ -2,6 +2,10 @@ package br.com.pessoal.portifolio.controller;
 
 
 import br.com.pessoal.portifolio.model.*;
+import br.com.pessoal.portifolio.repository.DesenvolvedorRepository;
+import br.com.pessoal.portifolio.repository.ProfileRepository;
+import br.com.pessoal.portifolio.repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +19,18 @@ import java.util.List;
 @RequestMapping("/")
 public class HomeController {
 
+    @Autowired
+    private DesenvolvedorRepository devRepository;
+
+    @Autowired
+    private UsuarioRepository userRepository;
+
+    @Autowired
+    private ProfileRepository profileRepository;
+
     @GetMapping
     public ResponseEntity<String> boasVindas(){
-        populateSpry();
+        populateSpy();
         return ResponseEntity.ok("BOAS VINDAS AO SITE DE PORTIFÓLIOS ONLINE");
     }
 
@@ -40,6 +53,10 @@ public class HomeController {
                 AreaAtuacao.FRONTEND, Senioridade.SENIOR, EnumSet.of(Tecnologias.JAVASCRIPT,Tecnologias.HTML,Tecnologias.CSS,Tecnologias.PYTHON)));
         desenvolvedores.add(new Desenvolvedor("Anderson", "Uma porrada de experiencia", usuarios.get(2),"55845627142",
                 AreaAtuacao.FULLSTACK, Senioridade.PLENO, EnumSet.of(Tecnologias.CSHARP,Tecnologias.JAVASCRIPT,Tecnologias.HTML,Tecnologias.CSS,Tecnologias.PHP, Tecnologias.PYTHON)));
+
+        profileRepository.saveAll(profiles);
+        userRepository.saveAll(usuarios);
+        devRepository.saveAll(desenvolvedores);
 
     }
 
