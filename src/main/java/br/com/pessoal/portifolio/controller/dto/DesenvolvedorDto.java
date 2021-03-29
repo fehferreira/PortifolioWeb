@@ -10,14 +10,12 @@ import org.springframework.data.domain.Page;
 public class DesenvolvedorDto {
 
     private String nome;
-    private Usuario seuUsuario;
     private String telefone;
     private AreaAtuacao suaArea;
     private Senioridade suaSenioridade;
 
     public DesenvolvedorDto(Desenvolvedor desenvolvedor) {
         this.nome = desenvolvedor.getNome();
-        this.seuUsuario = desenvolvedor.getSeuUsuario();
         this.telefone = desenvolvedor.getNumeroTelefone();
         this.suaArea = desenvolvedor.getAreaAtuacao();
         this.suaSenioridade = desenvolvedor.getDevSenioridade();
@@ -37,14 +35,6 @@ public class DesenvolvedorDto {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public Usuario getSeuUsuario() {
-        return seuUsuario;
-    }
-
-    public void setSeuUsuario(Usuario seuUsuario) {
-        this.seuUsuario = seuUsuario;
     }
 
     public String getTelefone() {
@@ -70,5 +60,4 @@ public class DesenvolvedorDto {
     public void setSuaSenioridade(Senioridade suaSenioridade) {
         this.suaSenioridade = suaSenioridade;
     }
-
 }
