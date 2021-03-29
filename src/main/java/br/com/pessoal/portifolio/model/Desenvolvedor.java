@@ -8,7 +8,7 @@ public class Desenvolvedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
     private String nome;
     private String experiencias;
 
@@ -44,11 +44,11 @@ public class Desenvolvedor {
     }
 
     public Long getId() {
-        return Id;
+        return this.id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNome() {

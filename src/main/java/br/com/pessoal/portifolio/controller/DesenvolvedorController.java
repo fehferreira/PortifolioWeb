@@ -30,6 +30,7 @@ public class DesenvolvedorController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping
+    @ResponseBody
     public Page<DesenvolvedorDto> listarDesenvolvedores(@PageableDefault(sort="id", direction = Sort.Direction.ASC)Pageable pageable){
         return DesenvolvedorDto.converter(desenvolvedorRepository.findAll(pageable));
     }
