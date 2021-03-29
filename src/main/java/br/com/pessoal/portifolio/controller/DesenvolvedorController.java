@@ -6,11 +6,13 @@ import br.com.pessoal.portifolio.controller.form.DesenvolvedorAtualizadoForm;
 import br.com.pessoal.portifolio.controller.form.DesenvolvedorForm;
 import br.com.pessoal.portifolio.model.Desenvolvedor;
 import br.com.pessoal.portifolio.repository.DesenvolvedorRepository;
+import br.com.pessoal.portifolio.repository.ProfileRepository;
 import br.com.pessoal.portifolio.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +32,9 @@ public class DesenvolvedorController {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private ProfileRepository profileRepository;
+
     @GetMapping
     @ResponseBody
     public Page<DesenvolvedorDto> listarDesenvolvedores(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
@@ -39,7 +44,9 @@ public class DesenvolvedorController {
     @PostMapping
     @ResponseBody
     public ResponseEntity<DesenvolvedorDto> cadastrarDesenvolvedor(@RequestBody DesenvolvedorForm form, UriComponentsBuilder uriBuilder) {
-        Desenvolvedor dev = form.converter(usuarioRepository);
+        profileRepository.save(form.getSeuUsuario().getProfile());
+        usuarioRepository.save(form.getSeuUsuario());
+        Desenvolvedor dev = form.converter();
         desenvolvedorRepository.save(dev);
 
         URI uri = uriBuilder.path("/desenvolvedores/{id}").buildAndExpand(dev.getId()).toUri();

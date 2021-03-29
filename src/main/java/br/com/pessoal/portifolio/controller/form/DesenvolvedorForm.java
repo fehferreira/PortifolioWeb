@@ -20,8 +20,8 @@ public class DesenvolvedorForm {
     private Senioridade suaSenioridade;
     private Set<Tecnologias> suaTecnologia;
 
-    public Desenvolvedor converter(UsuarioRepository usuarioRepository) {
-        return new Desenvolvedor(this.nome,this.experiencias,usuarioRepository.findByUsername(this.seuUsuario.getUsername()),
+    public Desenvolvedor converter() {
+        return new Desenvolvedor(this.nome,this.experiencias,this.seuUsuario,
                 this.telefone,this.suaArea,this.suaSenioridade,this.suaTecnologia);
     }
 
