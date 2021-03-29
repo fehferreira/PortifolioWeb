@@ -71,7 +71,7 @@ public class DesenvolvedorController {
 
     @ResponseBody
     @GetMapping("/{id}")
-    public ResponseEntity<DevDetalhadoDto> detalharDesenvolvedor(@RequestParam Long id) {
+    public ResponseEntity<DevDetalhadoDto> detalharDesenvolvedor(@PathVariable Long id) {
         Optional<Desenvolvedor> desenvolvedor = desenvolvedorRepository.findById(id);
         if (desenvolvedor.isPresent()) {
             return ResponseEntity.ok().body(DevDetalhadoDto.converter(desenvolvedor.get()));
