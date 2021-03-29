@@ -31,13 +31,13 @@ public class DesenvolvedorController {
 
     @GetMapping
     @ResponseBody
-    public Page<DesenvolvedorDto> listarDesenvolvedores(@PageableDefault(sort="id", direction = Sort.Direction.ASC)Pageable pageable){
+    public Page<DesenvolvedorDto> listarDesenvolvedores(@PageableDefault(sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
         return DesenvolvedorDto.converter(desenvolvedorRepository.findAll(pageable));
     }
 
     @PostMapping
     @ResponseBody
-    public ResponseEntity<DesenvolvedorDto> cadastrarDesenvolvedor(@RequestBody DesenvolvedorForm form, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<DesenvolvedorDto> cadastrarDesenvolvedor(@RequestBody DesenvolvedorForm form, UriComponentsBuilder uriBuilder) {
         Desenvolvedor dev = form.converter(usuarioRepository);
         desenvolvedorRepository.save(dev);
 
@@ -47,24 +47,35 @@ public class DesenvolvedorController {
 
     @PutMapping
     @ResponseBody
-    public ResponseEntity<DesenvolvedorDto> atualizarDesenvolvedor(@RequestParam DesenvolvedorAtualizadoForm updateForm){
+    public ResponseEntity<DesenvolvedorDto> atualizarDesenvolvedor(@RequestParam DesenvolvedorAtualizadoForm updateForm) {
         Optional<Desenvolvedor> desenvolvedor = desenvolvedorRepository.findById(updateForm.getId());
-        if(desenvolvedor.isPresent()){
+        if (desenvolvedor.isPresent()) {
             desenvolvedorRepository.save(desenvolvedor.get());
             return ResponseEntity.ok(DesenvolvedorDto.converter(desenvolvedor.get()));
-        }else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping
-    public ResponseEntity<?> deletarDesenvolvedor(@RequestParam Long idDesenvolvedor){
-        try{
+    public ResponseEntity<?> deletarDesenvolvedor(@RequestParam Long idDesenvolvedor) {
+        try {
             desenvolvedorRepository.deleteById(idDesenvolvedor);
             return ResponseEntity.ok().build();
-        }catch (Exception e){
+        } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+
+    @ResponseBody
+    @GetMapping("/{id}")
+    public ResponseEntity<DevDetalhadoDto> detalharDesenvolvedor(@RequestParam Long id) {
+        Optional<Desenvolvedor> desenvolvedor = desenvolvedorRepository.findById(id);
+        if (desenvolvedor.isPresent()) {
+            return ResponseEntity.ok().body(DesenvolvedorDto.converter(desenvolvedor.get()));
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }
