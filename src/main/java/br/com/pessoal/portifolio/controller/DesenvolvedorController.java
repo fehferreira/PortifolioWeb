@@ -1,6 +1,7 @@
 package br.com.pessoal.portifolio.controller;
 
 import br.com.pessoal.portifolio.controller.dto.DesenvolvedorDto;
+import br.com.pessoal.portifolio.controller.dto.DevDetalhadoDto;
 import br.com.pessoal.portifolio.controller.form.DesenvolvedorAtualizadoForm;
 import br.com.pessoal.portifolio.controller.form.DesenvolvedorForm;
 import br.com.pessoal.portifolio.model.Desenvolvedor;
@@ -73,7 +74,7 @@ public class DesenvolvedorController {
     public ResponseEntity<DevDetalhadoDto> detalharDesenvolvedor(@RequestParam Long id) {
         Optional<Desenvolvedor> desenvolvedor = desenvolvedorRepository.findById(id);
         if (desenvolvedor.isPresent()) {
-            return ResponseEntity.ok().body(DesenvolvedorDto.converter(desenvolvedor.get()));
+            return ResponseEntity.ok().body(DevDetalhadoDto.converter(desenvolvedor.get()));
         }
         return ResponseEntity.notFound().build();
     }
